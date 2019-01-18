@@ -13,10 +13,19 @@
 @property (weak, nonatomic) IBOutlet UILabel *tipAmountLabel;
 @property (weak, nonatomic) IBOutlet UIButton *tipButton;
 @property (weak, nonatomic) IBOutlet UITextField *tipPercentageTextField;
+@property (weak, nonatomic) IBOutlet UISlider *adjustTipPercentage;
 
 @end
 
 @implementation TipViewController
+- (IBAction)slideTipValueChanged:(UISlider *)sender {
+    double tipAmount = sender.value/100 * [self.billAmountTextField.text doubleValue];
+    self.tipPercentageTextField.text = @"";
+    self.tipPercentageTextField.text = [NSString stringWithFormat:@"%f%%", sender.value];
+    
+    self.tipAmountLabel.text = @"";
+    self.tipAmountLabel.text = [NSString stringWithFormat:@"$%.2f", tipAmount];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
